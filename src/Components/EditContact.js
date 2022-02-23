@@ -9,29 +9,26 @@ import Button from "@mui/material/Button";
 const EditContact = () => {
   const [contacts, setContacts] = useState([]);
   const [editContacts, setEditContacts] = useState(false);
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [type, setType] = useState("personal");
   const [isWhatsapp, setIsWhatsapp] = useState(false);
   const [contactDetails, setContactDetails] = useState({});
+  const [contactIndex, setContactIndex] = useState(0);
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("contacts") || "[]");
     setContacts(data);
   }, []);
 
-  const handleData = () => {
-    contacts.push({
-      id: contactDetails._id,
-      name: contactDetails.name,
-      phone: contactDetails.phone,
-      type: contactDetails.type,
-      isWhatsapp: contactDetails.isWhatsapp,
-    });
+  useEffect(() => {
     localStorage.setItem("contacts", JSON.stringify(contacts));
-    setName("");
-    setPhone("");
-    setType("personal");
-    isWhatsapp(false);
+  }, [JSON.stringify(contacts)]);
+
+  const handleData = () => {
+    const temp = contacts;
+    temp[contactIndex].id = contactDetails.id;
+    temp[contactIndex].name = contactDetails.name;
+    temp[contactIndex].phone = contactDetails.phone;
+    temp[contactIndex].type = contactDetails.type;
+    temp[contactIndex].isWhatsapp = contactDetails.isWhatsapp;
+    setContacts(temp);
     setEditContacts(false);
   };
 
@@ -43,9 +40,10 @@ const EditContact = () => {
     });
   };
 
-  const hanldeEditContact = (index) => {
+  const handleEditContacts = (index) => {
     setEditContacts(true);
     setContactDetails(contacts[index]);
+    setContactIndex(index);
   };
 
   const handleInputChange = (e) => {
@@ -60,7 +58,7 @@ const EditContact = () => {
     <div className="App">
       {editContacts ? (
         <div>
-          <Grid item xs={12} style={{ width: "100%", marginBottom: 20 }}>
+          <Grid item style={{ width: "100%", marginBottom: 20 }}>
             <TextField
               variant="outlined"
               label="name"
@@ -72,7 +70,7 @@ const EditContact = () => {
               style={{ width: "80%", fontSize: "10px" }}
             />
           </Grid>
-          <Grid item xs={12} style={{ width: "100%", marginBottom: 20 }}>
+          <Grid item style={{ width: "100%", marginBottom: 20 }}>
             <TextField
               variant="outlined"
               label="phone"
@@ -85,7 +83,7 @@ const EditContact = () => {
             />
           </Grid>
 
-          <Grid item xs={12} style={{ width: "100%" }}>
+          <Grid item style={{ width: "100%" }}>
             <FormControl style={{ width: "80%" }}>
               <InputLabel id="demo-simple-select-label">Type</InputLabel>
               <Select
@@ -101,7 +99,7 @@ const EditContact = () => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid container xs={6} md={12}>
+          <Grid container>
             <Checkbox
               size={"small"}
               defaultChecked={isWhatsapp}
@@ -131,7 +129,7 @@ const EditContact = () => {
                     }}
                   >
                     <p>{item.name}</p>
-                    <Button onClick={() => hanldeEditContact(index)}>
+                    <Button onClick={() => handleEditContacts(index)}>
                       Edit
                     </Button>
                   </div>
@@ -145,3 +143,4 @@ const EditContact = () => {
 };
 
 export default EditContact;
+

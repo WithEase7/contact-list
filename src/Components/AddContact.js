@@ -48,7 +48,7 @@ const AddContact = () => {
 
   return (
     <div className="App">
-       <Grid item xs={12} style={{ width: "100%", marginBottom: 20 }}>
+       <Grid item style={{ width: "100%", marginBottom: 20 }}>
             <TextField
               variant="outlined"
               label="name"
@@ -60,7 +60,7 @@ const AddContact = () => {
               style={{ width: "80%", fontSize: "10px" }}
             />
           </Grid>
-          <Grid item xs={12} style={{ width: "100%", marginBottom: 20 }}>
+          <Grid item style={{ width: "100%", marginBottom: 20 }}>
             <TextField
               variant="outlined"
               label="phone"
@@ -73,7 +73,7 @@ const AddContact = () => {
             />
           </Grid>
 
-          <Grid item xs={12} style={{ width: "100%" }}>
+          <Grid item style={{ width: "100%" }}>
             <FormControl style={{ width: "80%" }}>
               <InputLabel id="demo-simple-select-label">Type</InputLabel>
               <Select
@@ -89,7 +89,7 @@ const AddContact = () => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid container xs={6} md={12}>
+          <Grid container>
             <Checkbox
               size={"small"}
               defaultChecked={isWhatsapp}
