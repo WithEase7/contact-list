@@ -47,8 +47,9 @@ const AddContact = () => {
   };
 
   return (
-    <div className="App">
-       <Grid item style={{ width: "100%", marginBottom: 20 }}>
+    <div style={{marginTop: 50}}>
+    <div style={{width: "60%", margin: "0 auto"}}>
+       <Grid item style={{ width: "80%", margin: "0 auto" }}>
             <TextField
               variant="outlined"
               label="name"
@@ -57,10 +58,10 @@ const AddContact = () => {
               value={name}
               onChange={e => setName(e.target.value)}
               required
-              style={{ width: "80%", fontSize: "10px" }}
+              style={{ width: "100%", fontSize: "10px", marginBottom: 20 }}
             />
           </Grid>
-          <Grid item style={{ width: "100%", marginBottom: 20 }}>
+          <Grid item style={{ width: "80%", margin: "0 auto" }}>
             <TextField
               variant="outlined"
               label="phone"
@@ -69,12 +70,12 @@ const AddContact = () => {
               value={phone}
               onChange={e => setPhone(e.target.value)}
               required
-              style={{ width: "80%", fontSize: "10px" }}
+              style={{ width: "100%", fontSize: "10px", marginBottom: 20 }}
             />
           </Grid>
 
-          <Grid item style={{ width: "100%" }}>
-            <FormControl style={{ width: "80%" }}>
+          <Grid item style={{ width: "80%", margin: "0 auto" }}>
+            <FormControl style={{ width: "100%", marginBottom: 20 }}>
               <InputLabel id="demo-simple-select-label">Type</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -89,7 +90,7 @@ const AddContact = () => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid container>
+          <Grid container style={{ width: "80%", margin: "0 auto" }}>
             <Checkbox
               size={"small"}
               defaultChecked={isWhatsapp}
@@ -99,9 +100,10 @@ const AddContact = () => {
               Whatsapp
             </Typography>
           </Grid>
-      <div>
-        <Button onClick={handleData}>Add</Button>
+      <div style={{width: "10%",margin: "0 auto"}}>
+        <Button onClick={handleData} variant="contained">Add</Button>
       </div>
+    </div>
     </div>
   );
 };

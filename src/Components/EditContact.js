@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Grid, TextField, Checkbox, Typography } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
@@ -55,10 +56,10 @@ const EditContact = () => {
   };
 
   return (
-    <div className="App">
+    <div style={{ marginTop: 50 }}>
       {editContacts ? (
-        <div>
-          <Grid item style={{ width: "100%", marginBottom: 20 }}>
+        <div style={{ width: "60%", margin: "0 auto" }}>
+          <Grid item style={{ width: "80%", margin: "0 auto" }}>
             <TextField
               variant="outlined"
               label="name"
@@ -67,10 +68,10 @@ const EditContact = () => {
               value={contactDetails.name}
               onChange={handleInputChange}
               required
-              style={{ width: "80%", fontSize: "10px" }}
+              style={{ width: "100%", fontSize: "10px", marginBottom: 20 }}
             />
           </Grid>
-          <Grid item style={{ width: "100%", marginBottom: 20 }}>
+          <Grid item style={{ width: "80%", margin: "0 auto" }}>
             <TextField
               variant="outlined"
               label="phone"
@@ -79,12 +80,12 @@ const EditContact = () => {
               value={contactDetails.phone}
               onChange={handleInputChange}
               required
-              style={{ width: "80%", fontSize: "10px" }}
+              style={{ width: "100%", fontSize: "10px", marginBottom: 20 }}
             />
           </Grid>
 
-          <Grid item style={{ width: "100%" }}>
-            <FormControl style={{ width: "80%" }}>
+          <Grid item style={{ width: "80%", margin: "0 auto" }}>
+            <FormControl style={{ width: "100%", marginBottom: 20 }}>
               <InputLabel id="demo-simple-select-label">Type</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -99,7 +100,7 @@ const EditContact = () => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid container>
+          <Grid container style={{ width: "80%", margin: "0 auto" }}>
             <Checkbox
               size={"small"}
               defaultChecked={isWhatsapp}
@@ -109,33 +110,67 @@ const EditContact = () => {
               Whatsapp
             </Typography>
           </Grid>
-          <div>
-            <Button onClick={() => setEditContacts(false)}>Cancel</Button>
-            <Button onClick={handleData}>Save Changes</Button>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              marginTop: 20,
+            }}
+          >
+            <Button onClick={() => setEditContacts(false)} variant="contained">
+              Cancel
+            </Button>
+            <Button onClick={handleData} variant="contained">
+              Save Changes
+            </Button>
           </div>
         </div>
       ) : (
         <div>
-          {contacts.length
-            ? contacts.map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    style={{
-                      border: "1px solid black",
-                      justifyContent: "space-around",
-                      width: "40%",
-                      display: "flex",
-                    }}
+          {contacts.length ? (
+            contacts.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  style={{
+                    border: "1px solid black",
+                    borderRadius: 10,
+                    justifyContent: "space-between",
+                    paddingLeft: 20,
+                    width: "60%",
+                    display: "flex",
+                    margin: "0 auto",
+                    marginBottom: 20,
+                    background: "#7045a8",
+                  }}
+                >
+                  <p style={{ color: "white" }}>{item.name}</p>
+                  <Button onClick={() => handleEditContacts(index)} color="error">
+                    Edit
+                  </Button>
+                </div>
+              );
+            })
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <h3>No contacts saved</h3>
+                <Button variant="contained">
+                  <Link
+                    to="/add"
+                    style={{ textDecoration: "none", color: "white" }}
                   >
-                    <p>{item.name}</p>
-                    <Button onClick={() => handleEditContacts(index)}>
-                      Edit
-                    </Button>
-                  </div>
-                );
-              })
-            : null}
+                    Add contact
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -143,4 +178,3 @@ const EditContact = () => {
 };
 
 export default EditContact;
-
